@@ -1,14 +1,16 @@
 import { useState } from "react"
 import Head from "next/head";
 import Image from "next/image";
+import { TextField, Button, Typography } from "@mui/material";
+
 
 export default function Home() {
   const [genreInput, setGenreInput] = useState("");
   const [result, setResult] = useState();
 
-  async function onSubmit(ev) {
-    ev.preventDefault();
-    const response = await fetch("/api/generate", {
+  async function onSubmit(event) {
+    event.preventDefault();
+    const response = await fetch("./api/generate", {
       method: "POST",
       header: {
         "Content-Type": "application/json",
@@ -26,14 +28,19 @@ export default function Home() {
         <title>Name My Band</title>
         <link rel="icon" href="/band.png"/>
       </Head>
-      <main>
-        <Image src="/band.png" alt="icon of a band" width={75} height={75}/>
-        <h2>Name My Band</h2>
+      <main display="flex" flex-direction="column" align-items="center">
+        <Image src="/band.png" alt="icon of a band" width={80} height={80}/>
+        <br/>
+        <Typography variant="h5">Name My Band</Typography>
+        <br/>
         <form onSubmit={onSubmit}>
-          <input type="text" name="genre" placeholder="Enter a genre" value={genreInput} onChange={(ev) => setGenreInput(ev.target.value)}/>
-          <input type="submit" name="generate names"/>
+          <TextField id="outlined-basic" size="small" label="Enter a genre" value={genreInput} onChange={(event) => setGenreInput(event.target.value)}/>
+          <br/>
+          <h3></h3>
+          <Button type="submit" name="generate names" variant="contained" size="small">Submit</Button>
         </form>
-        <div>{result}</div>
+        <br/>
+        <Typography variant="body1">{result}</Typography>
       </main>
     </div>
   );

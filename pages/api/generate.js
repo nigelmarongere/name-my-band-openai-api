@@ -16,13 +16,5 @@ export default async function (req, res) {
 }
 
 function generatePrompt(genre){
-  const capitalizedGenre = genre[0].toUpperCase() + genre.slice(1).toLowerCase();
-  return `Suggest three genre specific names for a band.
-  
-  Genre: Psychedelic rock
-  Names: The Beatles, Pink Floyd, Jefferson Airplane
-  Genre: Jazz
-  Names: Rat Pack, Modern Jazz Quartet, Glenn Miller Orchestra
-  Genre: ${capitalizedGenre}
-  Names: `;
+  return `Suggest a name for a ${genre} band.`;
 }
